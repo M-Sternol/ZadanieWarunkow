@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.Design;
 
 namespace Zadanie
@@ -12,8 +12,7 @@ namespace Zadanie
             while (isRunning)
             {
                 Console.WriteLine("\nZadania Warunków");
-                Console.WriteLine("Wprowadź numer Zadania od 1 do 13: ");
-                Console.Write("14.Wyjście \n");
+                Console.WriteLine("Wprowadź numer Zadania od 1 do 13 albo 14.Wyjście ");
                 var operation = Console.ReadLine();
                 Console.WriteLine();
 
@@ -39,87 +38,120 @@ namespace Zadanie
                     case "2":
                         Console.Clear();
                         Console.WriteLine("Napisz program w C#, który sprawdzi czy podana przez użytkownika liczba jest parzysta czy nieparzysta.");
-                        Console.WriteLine("Wprowadź liczbę!");
-                        float number = float.Parse(Console.ReadLine());
-                        if (number % 2 == 0)
+                        Console.WriteLine("Podaj liczbę:");
+                        int number2;
+                        if (!int.TryParse(Console.ReadLine(), out number2))
                         {
-                            Console.WriteLine($"Liczba {number} jest parzysta!");
+                            Console.WriteLine("Nieprawidłowa liczba.");
+                            continue;
+                        }
+
+                        if (number2 % 2 == 0)
+                        {
+                            Console.WriteLine("Podana liczba jest parzysta.");
                         }
                         else
                         {
-                            Console.WriteLine($"Liczba {number} jest nieparzysta!");
+                            Console.WriteLine("Podana liczba jest nieparzysta.");
                         }
                         break;
                     case "3":
                         Console.Clear();
                         Console.WriteLine("Napisz program w C#, który sprawdzi czy podana przez użytkownika liczba jest dodatnia czy ujemna.");
-                        Console.WriteLine("Wprowadź liczbę!");
-                        float number1 = float.Parse(Console.ReadLine());
-                        if (number1 >= 0)
+                        Console.WriteLine("Podaj liczbę:");
+                        float number3;
+                        if (!float.TryParse(Console.ReadLine(), out number3))
                         {
-                            Console.WriteLine($"Liczba {number1} jest dodatnia!");
+                            Console.WriteLine("Nieprawidłowa liczba.");
+                            continue;
+                        }
+
+                        if (number3 > 0)
+                        {
+                            Console.WriteLine("Podana liczba jest dodatnia.");
+                        }
+                        else if (number3 < 0)
+                        {
+                            Console.WriteLine("Podana liczba jest ujemna.");
                         }
                         else
                         {
-                            Console.WriteLine($"Liczba {number1} jest ujemna");
+                            Console.WriteLine("Podana liczba jest równa zero.");
                         }
 
                         break;
                     case "4":
                         Console.Clear();
                         Console.WriteLine("Napisz program w C#, który sprawdzi czy podany przez użytkownika rok jest rokiem przestępnym.");
-                        Console.WriteLine("Wprowadź Rok!");
-                        float number2 = float.Parse(Console.ReadLine());
-                        if (number2 % 4 == 0)
+                        Console.WriteLine("Podaj rok:");
+                        int year;
+                        if (!int.TryParse(Console.ReadLine(), out year) || year <= 0)
                         {
-                            Console.WriteLine($"Rok {number2} Jest rokiem przystępnym");
+                            Console.WriteLine("Nieprawidłowy rok.");
+                            continue;
+                        }
+
+                        bool isLeapYear = false;
+
+                        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+                        {
+                            isLeapYear = true;
+                        }
+
+                        if (isLeapYear)
+                        {
+                            Console.WriteLine($"{year} jest rokiem przestępnym.");
                         }
                         else
                         {
-                            Console.WriteLine($"Rok {number2} nie jest rokiem przystępnym");
+                            Console.WriteLine($"{year} nie jest rokiem przestępnym.");
                         }
                         break;
                     case "5":
                         Console.Clear();
                         Console.WriteLine("Napisz program w C#, który sprawdzi czy podany przez użytkownika wiek uprawnia go do ubiegania się o stanowisko posła, premiera, sentarora,Prezydenta");
-                        Console.WriteLine("Wprowadź swój wiek:");
-                        float age = float.Parse(Console.ReadLine());
-                        if (age >= 21 && age <= 29)
+                        Console.WriteLine("Podaj swój wiek:");
+                        int age;
+                        if (!int.TryParse(Console.ReadLine(), out age) || age < 0)
                         {
-                            Console.WriteLine("Twój wiek uprawnia cię do zostania Posłem!");
-                            return;
+                            Console.WriteLine("Nieprawidłowy wiek.");
+                            continue;
                         }
-                        else if (age >= 30 && age <= 34)
+
+                        if (age >= 21)
                         {
-                            Console.WriteLine("Twój wiek uprawnia cię do zostania Senatorem");
-                            return;
+                            Console.WriteLine("Możesz ubiegać się o stanowisko posła.");
                         }
-                        else if (age >= 35 && age <= 64)
+
+                        if (age >= 35)
                         {
-                            Console.WriteLine("Twój wiek uprawnia cię do zostania Prezydentem albo premierem");
-                            return;
+                            Console.WriteLine("Możesz ubiegać się o stanowisko premiera.");
+                            Console.WriteLine("Możesz ubiegać się o stanowisko prezydenta.");
                         }
-                        else if (age >= 65)
+
+                        if (age >= 30)
                         {
-                            Console.WriteLine("W tym wieku juz niestety emeryturka");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Twój Wiek Jest nie odpowiedni!");
+                            Console.WriteLine("Możesz ubiegać się o stanowisko senatora.");
                         }
                         break;
                     case "6":
                         Console.Clear();
                         Console.WriteLine("Napisz program w C#, który pobierze wzrost użytkownika i przypisze mu wymyśloną kategorię wzrostu.");
                         Console.WriteLine("Wprowadź swój wzrost w cm:");
-                        float height = float.Parse(Console.ReadLine());
-                        if (height >= 20 && height <= 140)
+                        float height;
+                        if (!float.TryParse(Console.ReadLine(), out height) || height <= 0)
                         {
-                            Console.WriteLine($"Twój wzrost: {height}cm mieści sie w zakresie dziecka!");
+                            Console.WriteLine("Nieprawidłowy wzrost.");
+                            continue;
+                        }
+
+                        if (height >= 50 && height <= 140)
+                        {
+                            Console.WriteLine($"Twój wzrost: {height}cm mieści się w zakresie dziecka!");
                         }
                         else if (height >= 141 && height <= 190)
                         {
-                            Console.WriteLine($"Twój wzrost: {height}cm mieści sie w zakresie dorosłego człowieka!");
+                            Console.WriteLine($"Twój wzrost: {height}cm mieści się w zakresie dorosłego człowieka!");
                         }
                         else if (height >= 191 && height <= 230)
                         {
@@ -127,21 +159,35 @@ namespace Zadanie
                         }
                         else
                         {
-                            Console.WriteLine("Dane są nie prawiedłowe!");
+                            Console.WriteLine("Podany wzrost nie mieści się w żadnym zakresie!");
                         }
                         break;
                     case "7":
                         Console.Clear();
                         Console.WriteLine("Napisz program w C#, który pobierze 3 liczby od użytkownika i sprawdzi, która jest największa");
                         Console.WriteLine("Wprowadź pierwszą liczbę:");
-                        float num1 = float.Parse(Console.ReadLine());
+                        if (!float.TryParse(Console.ReadLine(), out float num1))
+                        {
+                            Console.WriteLine("Nieprawidłowa wartość dla pierwszej liczby. Spróbuj ponownie.");
+                            continue;
+                        }
+
                         Console.WriteLine("Wprowadź drugą liczbę:");
-                        float num2 = float.Parse(Console.ReadLine());
+                        if (!float.TryParse(Console.ReadLine(), out float num2))
+                        {
+                            Console.WriteLine("Nieprawidłowa wartość dla drugiej liczby. Spróbuj ponownie.");
+                            continue;
+                        }
+
                         Console.WriteLine("Wprowadź trzecią liczbę:");
-                        float num3 = float.Parse(Console.ReadLine());
-                        float result = Math.Max(num1, num2);
-                        float resultfinal = Math.Max(result, num3);
-                        Console.WriteLine($"Największa liczba to: {resultfinal}");
+                        if (!float.TryParse(Console.ReadLine(), out float num3))
+                        {
+                            Console.WriteLine("Nieprawidłowa wartość dla trzeciej liczby. Spróbuj ponownie.");
+                            continue;
+                        }
+
+                        float resultFinal = Math.Max(num1, Math.Max(num2, num3));
+                        Console.WriteLine($"Największa liczba to: {resultFinal}");
                         break;
                     case "8":
                         Console.Clear();
@@ -149,40 +195,39 @@ namespace Zadanie
                         Console.WriteLine("Kryteria przyjmowania na studia:");
                         Console.WriteLine("\r\nWyniki Matematyka - 70%" + "\r\nWynik Fizyka - 55%" + "\r\nWynik Chemia - 45%" + "\r\nŁączny wynik z 3 przemiotów powyżej 180% albo wynik Matematyka + jeden przedmiot = 150%");
                         Console.WriteLine("Wprowadź wyniki procentowe z przedmiotów:");
-                        Console.WriteLine("Matematyka:"); float Mathematics = float.Parse(Console.ReadLine());
-                        if (Mathematics < 70)
+                        Console.WriteLine("Podaj wynik z matematyki:");
+                        int matematyka;
+                        if (!int.TryParse(Console.ReadLine(), out matematyka) || matematyka < 0 || matematyka > 100)
                         {
-                            Console.WriteLine("Wynik nie mieści się w wymaganych kryteriach!");
-                            break;
+                            Console.WriteLine("Nieprawidłowy wynik z matematyki. Podaj liczbę z zakresu 0-100.");
+                            continue;
                         }
-                        Console.WriteLine("Fizyka:"); float Physics = float.Parse(Console.ReadLine());
-                        Console.WriteLine("Chemia:"); float Chemistry = float.Parse(Console.ReadLine());
-                        float Totalresult = Mathematics + Physics + Chemistry;
-                        if (Mathematics >= 70 && Physics >= 55 && Chemistry >= 45)
+
+                        Console.WriteLine("Podaj wynik z fizyki:");
+                        int fizyka;
+                        if (!int.TryParse(Console.ReadLine(), out fizyka) || fizyka < 0 || fizyka > 100)
                         {
-                            Console.WriteLine($"Kandydat dopuszczony do rekrutacji z wynikiem całkowitym: {Totalresult}% !");
+                            Console.WriteLine("Nieprawidłowy wynik z fizyki. Podaj liczbę z zakresu 0-100.");
+                            continue;
                         }
-                        else if (Mathematics + Physics + Chemistry >= 180)
+
+                        Console.WriteLine("Podaj wynik z chemii:");
+                        int chemia;
+                        if (!int.TryParse(Console.ReadLine(), out chemia) || chemia < 0 || chemia > 100)
                         {
-                            Console.WriteLine($"Kandydat dopuszczony do rekrutacji z wynikiem całkowitym: {Totalresult}% !");
+                            Console.WriteLine("Nieprawidłowy wynik z chemii. Podaj liczbę z zakresu 0-100.");
+                            continue;
                         }
-                        else if (Mathematics + Physics >= 150)
+
+                        int suma = matematyka + fizyka + chemia;
+
+                        if ((matematyka >= 150 && (fizyka > 55 || chemia > 45)) || suma >= 180)
                         {
-                            Console.WriteLine("Kandydat dopuszczony do rekrutacji z wynikami:");
-                            Console.WriteLine($"Matematyka: {Mathematics}%");
-                            Console.WriteLine($"Fizyka: {Physics}%");
-                            Console.WriteLine($"Wynik całkowity: {Totalresult - Chemistry}%");
-                        }
-                        else if (Mathematics + Chemistry >= 150)
-                        {
-                            Console.WriteLine("Kandydat dopuszczony do rekrutacji z wynikami:");
-                            Console.WriteLine($"Matematyka: {Mathematics}%");
-                            Console.WriteLine($"Chemia: {Chemistry}%");
-                            Console.WriteLine($"Wynik całkowity: {Totalresult - Physics}%");
+                            Console.WriteLine("Kandydat dopuszczony do rekrutacji.");
                         }
                         else
                         {
-                            Console.WriteLine("Kandydat nie dopuszczony do rekrutacji");
+                            Console.WriteLine("Kandydat nie spełnia warunków rekrutacji.");
                         }
                         break;
                     case "9":
@@ -223,15 +268,15 @@ namespace Zadanie
                         Console.Clear();
                         Console.WriteLine("Napisz program, który sprawdzi, czy z 3 podanych długości można stworzyć trójkąt\n");
                         Console.WriteLine("Podaj długość pierwszego boku:");
-                        double A = Convert.ToDouble(Console.ReadLine());
+                        double sideA = Convert.ToDouble(Console.ReadLine());
 
                         Console.WriteLine("Podaj długość drugiego boku:");
-                        double B = Convert.ToDouble(Console.ReadLine());
+                        double sideB = Convert.ToDouble(Console.ReadLine());
 
                         Console.WriteLine("Podaj długość trzeciego boku:");
-                        double c = Convert.ToDouble(Console.ReadLine());
+                        double sideC = Convert.ToDouble(Console.ReadLine());
 
-                        if (A > 0 && B > 0 && c > 0 && A + B > c && B + c > A && c + A > B)
+                        if (sideA > 0 && sideB > 0 && sideC > 0 && sideA + sideB > sideC && sideB + sideC > sideA && sideC + sideA > sideB)
                         {
                             Console.WriteLine("Z podanych długości boków można stworzyć trójkąt.");
                         }
@@ -265,61 +310,124 @@ namespace Zadanie
                             case "6":
                                 Console.WriteLine("Celujący!");
                                 break;
+                            default:
+                                Console.WriteLine("Nieprawidłowy ocena!");
+                                break;
                         }
                         break;
                     case "12":
                         Console.Clear();
                         Console.WriteLine("Napisz program, który pobierze numer dnia tygodnia i wyświetli jego nazwę");
-                        Console.WriteLine("Wprowadź numer dnia tygonia: ");
-                        var Weekday = Console.ReadLine();
-                        switch (Weekday)
+                        Console.WriteLine("Wprowadź numer/nazwę dnia tygodnia: ");
+                        string userWeekday = Console.ReadLine();
+
+                        if (int.TryParse(userWeekday, out int weekdayNumber))
                         {
-                            case "1":
-                                Console.WriteLine("Dzień pierwszy - Poniedziałek");
-                                break;
-                            case "2":
-                                Console.WriteLine("Dzień drugi - Wtorek");
-                                break;
-                            case "3":
-                                Console.WriteLine("Dzień trzeci - Środa");
-                                break;
-                            case "4":
-                                Console.WriteLine("Dzień czwarty - Czwartek");
-                                break;
-                            case "5":
-                                Console.WriteLine("Dzień piąty - Piątek");
-                                break;
-                            case "6":
-                                Console.WriteLine("Dzień szósty - Sobota");
-                                break;
-                            case "7":
-                                Console.WriteLine("Dzień siódmy - Niedziela");
-                                break;
+                            switch (weekdayNumber)
+                            {
+                                case 1:
+                                    Console.WriteLine("Dzień pierwszy - Poniedziałek");
+                                    break;
+                                case 2:
+                                    Console.WriteLine("Dzień drugi - Wtorek");
+                                    break;
+                                case 3:
+                                    Console.WriteLine("Dzień trzeci - Środa");
+                                    break;
+                                case 4:
+                                    Console.WriteLine("Dzień czwarty - Czwartek");
+                                    break;
+                                case 5:
+                                    Console.WriteLine("Dzień piąty - Piątek");
+                                    break;
+                                case 6:
+                                    Console.WriteLine("Dzień szósty - Sobota");
+                                    break;
+                                case 7:
+                                    Console.WriteLine("Dzień siódmy - Niedziela");
+                                    break;
+                                default:
+                                    Console.WriteLine("Nieprawidłowy numer dnia tygodnia!");
+                                    break;
+                            }
                         }
+                        else
+                        {
+                            switch (userWeekday.ToLower())
+                            {
+                                case "poniedziałek":
+                                    Console.WriteLine("Dzień pierwszy - Poniedziałek");
+                                    break;
+                                case "wtorek":
+                                    Console.WriteLine("Dzień drugi - Wtorek");
+                                    break;
+                                case "środa":
+                                    Console.WriteLine("Dzień trzeci - Środa");
+                                    break;
+                                case "czwartek":
+                                    Console.WriteLine("Dzień czwarty - Czwartek");
+                                    break;
+                                case "piątek":
+                                    Console.WriteLine("Dzień piąty - Piątek");
+                                    break;
+                                case "sobota":
+                                    Console.WriteLine("Dzień szósty - Sobota");
+                                    break;
+                                case "niedziela":
+                                    Console.WriteLine("Dzień siódmy - Niedziela");
+                                    break;
+                                default:
+                                    Console.WriteLine("Nieprawidłowy dzień tygodnia!");
+                                    break;
+                            }
+                        }
+
                         break;
                     case "13":
                         Console.Clear();
                         Console.WriteLine(". Napisz program, który będzie posiadał proste menu (wg. Wzoru poniżej) I będzie prostym kalkulatorem ");
+
                         Console.WriteLine("Podaj pierwszą liczbę:");
-                        float firstnum = float.Parse(Console.ReadLine());
+                        if (!float.TryParse(Console.ReadLine(), out float firstNum))
+                        {
+                            Console.WriteLine("Nieprawidłowa wartość dla pierwszej liczby.");
+                            continue;
+                        }
+
                         Console.WriteLine("Podaj drugą liczbę:");
-                        float secondnum = float.Parse(Console.ReadLine());
+                        if (!float.TryParse(Console.ReadLine(), out float secondNum))
+                        {
+                            Console.WriteLine("Nieprawidłowa wartość dla drugiej liczby.");
+                            continue;
+                        }
+
                         Console.WriteLine("Podaj numer operacji do wykonania:");
                         Console.WriteLine("\r\n 1.Dodawanie" + "\r\n 2.Odejmowanie" + "\r\n 3.Mnożenie" + "\r\n 4.Dzielenie \r\n");
-                        var numOperation = Console.ReadLine();
+
+                        string numOperation = Console.ReadLine();
                         switch (numOperation)
                         {
                             case "1":
-                                Console.WriteLine($"= {firstnum + secondnum}");
+                                Console.WriteLine($"= {firstNum + secondNum}");
                                 break;
                             case "2":
-                                Console.WriteLine($"= {firstnum - secondnum}");
+                                Console.WriteLine($"= {firstNum - secondNum}");
                                 break;
                             case "3":
-                                Console.WriteLine($"= {firstnum * secondnum}");
+                                Console.WriteLine($"= {firstNum * secondNum}");
                                 break;
                             case "4":
-                                Console.WriteLine($"= {firstnum / secondnum}");
+                                if (secondNum == 0)
+                                {
+                                    Console.WriteLine("Nie można dzielić przez zero.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"= {firstNum / secondNum}");
+                                }
+                                break;
+                            default:
+                                Console.WriteLine("Nieprawidłowy numer operacji.");
                                 break;
                         }
                         break;
